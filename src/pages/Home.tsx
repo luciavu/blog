@@ -8,7 +8,9 @@ const Home = () => {
   useEffect(() => {
     fetchPosts()
       .then(setPosts)
-      .catch((err) => console.error('Error loading posts', err));
+      .catch((err) => {
+        console.error('Error loading posts', err);
+      });
   }, []);
 
   return (

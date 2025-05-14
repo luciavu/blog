@@ -1,9 +1,12 @@
-import axios from 'axios';
+import api from './api';
 import type { Post } from '../types';
 
-const API_URL = `${import.meta.env.VITE_API_URL}/posts`;
-
 export const fetchPosts = async (): Promise<Post[]> => {
-  const res = await axios.get(API_URL);
+  const res = await api.get('/posts');
+  return res.data;
+};
+
+export const fetchPostById = async (id: number): Promise<Post> => {
+  const res = await api.get(`/posts/${id}`);
   return res.data;
 };
