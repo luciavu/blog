@@ -1,3 +1,6 @@
+:root {
+  --main: rgb(255, 209, 69);
+}
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +10,12 @@
 html,
 body {
   height: 100%;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 body {
@@ -20,4 +29,47 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+header {
+  .logo {
+    padding: 0 1.2rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+
+    h1 {
+      letter-spacing: normal;
+      font-size: 2rem;
+    }
+    a {
+      margin-top: 0.2rem;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: white;
+    font-size: 1rem;
+    padding: 0 1rem;
+    cursor: pointer;
+  }
+
+  .login-options {
+    display: flex;
+    font-weight: 600;
+
+    * {
+      padding: 1.2rem 1.5rem;
+    }
+    .register {
+      background-color: var(--main);
+    }
+  }
+}
+
+main {
+  background-color: black;
+  color: white;
+  padding: 3rem;
 }

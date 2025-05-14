@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchPosts } from '../api/posts';
 import type { Post } from '../types';
-
+import PostPreview from '../components/PostPreview/PostPreview';
+import { Link } from 'react-router-dom';
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -14,15 +15,20 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Blog Posts</h1>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <img src={post.previewImage} alt="Preview image" />
-          <h2>{post.title}</h2>
-          <p>{post.content.slice(0, 50)}...</p>
-        </div>
-      ))}
+    <div className="grid-container">
+      <h1>LATEST STORIES</h1>
+
+      <p>
+        <Link to="/login" className="nav-link">
+          Login
+        </Link>{' '}
+        to comment on posts on this blog.
+      </p>
+      <div className="grid">
+        {posts.map((post) => (
+          <PostPreview key={post.id} post={post} idx={post.id}></PostPreview>
+        ))}
+      </div>
     </div>
   );
 };
