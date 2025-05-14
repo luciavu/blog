@@ -13,7 +13,7 @@ export const signup = async (
 
     if (error instanceof AxiosError) {
       if (error.response?.status === 409) {
-        message = error.response?.data.message || 'User already existsz';
+        message = error.response?.data.message || 'User already exists';
       } else {
         const errors = error.response?.data?.errors;
         if (Array.isArray(errors) && errors.length > 0) {
