@@ -5,7 +5,11 @@ export interface Post {
   previewImage: string;
   published: boolean;
   createdAt: string;
+  authorId: number;
 }
+
+export type PostData = Omit<Post, 'createdAt'>;
+export type NewPostData = Omit<PostData, 'id'>;
 
 export interface Comment {
   id: number;
@@ -13,4 +17,12 @@ export interface Comment {
   authorId: number;
   text: string;
   createdAt: string;
+}
+
+export interface AuthTokenPayload {
+  userId: number;
+  username: string;
+  isAdmin: boolean;
+  iat: number;
+  exp: number;
 }

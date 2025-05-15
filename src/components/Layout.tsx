@@ -1,19 +1,13 @@
+import { useAuth } from '../context/AuthContext';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getToken, logout } from '../api/auth';
 import { FaGithub } from 'react-icons/fa';
 
 const Layout = () => {
+  const { username, isLoggedIn, isAdmin, id, logoutUser } = useAuth();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsLoggedIn(!!getToken());
-  }, []);
 
   const handleLogout = () => {
-    logout();
-    setIsLoggedIn(false);
+    logoutUser();
     navigate('/');
   };
 
@@ -25,12 +19,26 @@ const Layout = () => {
             <FaGithub size={35} />
           </a>
           <h1>
-            <a href="./">Blog</a>
+            <Link to="/">Blog {isAdmin ? 'Admin' : ''}</Link>
           </h1>
+          {isAdmin && (
+            <h1>
+              <Link to="/admin" className="dashboard">
+                Dashboard
+              </Link>
+            </h1>
+          )}
         </div>
         <div>
           {isLoggedIn ? (
-            <button onClick={handleLogout}>Logout</button>
+            <div className="flex-container">
+              {' '}
+              <p>
+                Welcome {username}
+                {id}
+              </p>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
           ) : (
             <div className="login-options">
               <Link to="/login">Login</Link>

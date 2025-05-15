@@ -3,7 +3,10 @@ import { fetchPosts } from '../api/posts';
 import type { Post } from '../types';
 import PostPreview from '../components/PostPreview/PostPreview';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 const Home = () => {
+  const { isLoggedIn } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -16,14 +19,18 @@ const Home = () => {
 
   return (
     <div className="grid-container">
-      <h1>LATEST STORIES</h1>
+      <div className="welcome-message">
+        <h1>LATEST STORIES</h1>
+        {!isLoggedIn && (
+          <p>
+            <Link to="/login" className="nav-link">
+              Login
+            </Link>{' '}
+            to comment on posts on this blog.
+          </p>
+        )}
+      </div>
 
-      <p>
-        <Link to="/login" className="nav-link">
-          Login
-        </Link>{' '}
-        to comment on posts on this blog.
-      </p>
       <div className="grid">
         {posts.map((post) => (
           <PostPreview key={post.id} post={post} idx={post.id}></PostPreview>

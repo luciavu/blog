@@ -42,8 +42,13 @@ header {
       letter-spacing: normal;
       font-size: 2rem;
     }
-    a {
-      margin-top: 0.2rem;
+
+    .dashboard {
+      font-size: 1.4rem;
+      background-color: var(--main);
+      font-weight: 600;
+      letter-spacing: 0.02rem;
+      padding: 0.2rem 0.4rem;
     }
   }
 
@@ -71,5 +76,4 @@ header {
 main {
   background-color: black;
   color: white;
-  padding: 3rem;
 }
