@@ -58,7 +58,7 @@ export const EditableTable = <T extends { id: number }>({
                     <button onClick={() => handleSave?.(value)}>Save changes</button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(value)}>Delete post</button>
+                    <button onClick={() => handleDelete(value)}>Delete</button>
                   </td>
                 </>
               ) : (

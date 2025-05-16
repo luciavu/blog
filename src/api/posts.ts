@@ -52,9 +52,9 @@ export const updatePost = async (data: PostData): Promise<Post | string> => {
   }
 };
 
-export const deletePost = async (id: number): Promise<Post | string> => {
+export const deletePost = async (data: PostData): Promise<Post | string> => {
   try {
-    const res = await api.delete(`/posts/${id}`);
+    const res = await api.delete(`/posts/${data.id}`);
     return res.data;
   } catch (error) {
     let message = 'Something went wrong';

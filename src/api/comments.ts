@@ -2,6 +2,11 @@ import api from './api';
 import type { Comment } from '../types';
 import { AxiosError } from 'axios';
 
+export const fetchComments = async () => {
+  const res = await api.get(`/comments`);
+  return res.data;
+};
+
 export const fetchCommentsFromPostId = async (id: number): Promise<Comment[]> => {
   const res = await api.get(`/posts/${id}/comments`);
   return res.data;
@@ -24,9 +29,9 @@ export const createComment = async (postId: number, text: string): Promise<Comme
   }
 };
 
-export const deleteComment = async (postId: number, id: number): Promise<Comment | string> => {
+export const deleteComment = async (comment: Comment): Promise<Comment | string> => {
   try {
-    const res = await api.delete(`/posts/${postId}/comments/${id}`);
+    const res = await api.delete(`/posts/${comment.postId}/comments/${comment.id}`);
     return res.data;
   } catch (error) {
     let message = 'Something went wrong';

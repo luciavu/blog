@@ -6,14 +6,23 @@ import SignUp from './pages/SignUp';
 import PostDetails from './pages/PostDetails';
 import AdminDashboard from './pages/AdminDashboard';
 import Layout from './components/Layout';
+import RequireAdmin from './auth/RequireAdmin';
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/post/:id" element={<PostDetails />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/posts/:id" element={<PostDetails />} />
+
+        <Route
+          path="/admin"
+          element={
+            <RequireAdmin>
+              <AdminDashboard />
+            </RequireAdmin>
+          }
+        />
       </Route>
 
       <Route path="/login" element={<Login />} />
