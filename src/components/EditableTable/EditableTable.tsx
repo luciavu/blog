@@ -4,7 +4,9 @@ type EditableTableProps<T extends { id: number }> = {
   fields: (keyof T)[];
   values: T[];
   typeName: string;
-  handleDelete: (value: T) => void;
+  updatable: boolean;
+  deletable: boolean;
+  handleDelete?: (value: T) => void;
   handleInputChange?: (id: number, field: keyof T, value: string | boolean) => void;
   handleSave?: (value: T) => void;
   handleCreate?: () => void;
@@ -14,6 +16,8 @@ export const EditableTable = <T extends { id: number }>({
   fields,
   values,
   typeName,
+  updatable,
+  deletable,
   handleDelete,
   handleInputChange,
   handleSave,
@@ -63,13 +67,13 @@ export const EditableTable = <T extends { id: number }>({
               ))}
               {value.id > 0 ? (
                 <>
+                  <td>{updatable && <button onClick={() => handleSave?.(value)}>Save</button>}</td>
                   <td>
-                    <button onClick={() => handleSave?.(value)}>Save</button>
-                  </td>
-                  <td>
-                    <button className="delete" onClick={() => handleDelete(value)}>
-                      Delete
-                    </button>
+                    {deletable && (
+                      <button className="delete" onClick={() => handleDelete?.(value)}>
+                        Delete
+                      </button>
+                    )}
                   </td>
                 </>
               ) : (

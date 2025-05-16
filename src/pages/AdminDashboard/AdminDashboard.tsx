@@ -1,15 +1,18 @@
 import { fetchAllPosts, updatePost, deletePost, createPost } from '../../api/posts';
 import { useState, useEffect } from 'react';
-import type { Post, Comment } from '../../types';
+import type { Post, Comment, User } from '../../types';
 import { useAuth } from '../../context/AuthContext';
 import EditableTable from '../../components/EditableTable/EditableTable';
 import { fetchComments, deleteComment } from '../../api/comments';
 import './AdminDashboard.scss';
+import { fetchUsers } from '../../api/users';
 
 const AdminDashboard = () => {
   const { id } = useAuth();
+  const [users, setUsers] = useState<User[] | null>([]);
   const [posts, setPosts] = useState<Post[] | null>([]);
   const [comments, setComments] = useState<Comment[] | null>([]);
+
   const [newPost, setNewPost] = useState({
     title: '',
     previewImage: '',
@@ -35,9 +38,18 @@ const AdminDashboard = () => {
       });
   };
 
+  const loadUsers = () => {
+    fetchUsers()
+      .then(setUsers)
+      .catch((err) => {
+        console.error('Error loading users', err);
+      });
+  };
+
   useEffect(() => {
     loadPosts();
     loadComments();
+    loadUsers();
   }, []);
 
   const handleInputChange = (id: number, field: keyof Post, value: string | boolean) => {
@@ -54,7 +66,7 @@ const AdminDashboard = () => {
 
   const handleCreatePost = async () => {
     try {
-      const postToCreate = { ...newPost, authorId: id };
+      const postToCreate = { ...newPost, authorId: id! };
       await createPost(postToCreate);
     } catch (err) {
       console.error('Failed to create post', err);
@@ -71,11 +83,17 @@ const AdminDashboard = () => {
     return <div>Loading comments...</div>;
   }
 
+  if (!users) {
+    return <div>Loading comments...</div>;
+  }
+
   return (
     <div className="admin-dashboard flex-container">
       <EditableTable<Post>
         fields={['id', 'title', 'previewImage', 'content', 'published']}
         values={[...posts, { ...newPost, id: -1 }]}
+        updatable={true}
+        deletable={true}
         typeName="Posts"
         handleDelete={async (post) => {
           await deletePost(post);
@@ -88,11 +106,20 @@ const AdminDashboard = () => {
       <EditableTable<Comment>
         fields={['id', 'text', 'postId', 'authorId']}
         values={comments}
+        updatable={false}
+        deletable={true}
         typeName="Comments"
         handleDelete={async (comment) => {
           await deleteComment(comment);
           loadComments();
         }}
+      ></EditableTable>
+      <EditableTable<User>
+        fields={['id', 'username', 'isAdmin']}
+        values={users}
+        updatable={false}
+        deletable={false}
+        typeName="Users"
       ></EditableTable>
     </div>
   );
