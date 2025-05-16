@@ -73,7 +73,7 @@ const AdminDashboard = () => {
   return (
     <div>
       <EditableTable<Post>
-        fields={['id', 'title', 'previewImage', 'content', 'createdAt', 'authorId', 'published']}
+        fields={['id', 'title', 'previewImage', 'content', 'published']}
         values={[...posts, { ...newPost, id: -1 }]}
         typeName="Posts"
         handleDelete={async (post) => {
@@ -85,7 +85,7 @@ const AdminDashboard = () => {
         handleCreate={handleCreatePost}
       ></EditableTable>
       <EditableTable<Comment>
-        fields={['id', 'text', 'postId', 'authorId', 'createdAt']}
+        fields={['id', 'text', 'postId', 'authorId']}
         values={comments}
         typeName="Comments"
         handleDelete={async (comment) => {

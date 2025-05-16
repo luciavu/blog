@@ -11,6 +11,14 @@ const PostDetails = () => {
   const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
 
+  const loadComments = async (postId: number) => {
+    fetchCommentsFromPostId(postId)
+      .then(setComments)
+      .catch((err) => {
+        console.error('Error loading comments', err);
+      });
+  };
+
   useEffect(() => {
     if (id) {
       const postId = Number(id);
@@ -20,11 +28,7 @@ const PostDetails = () => {
           .catch((err) => {
             console.error('Error loading post', err);
           });
-        fetchCommentsFromPostId(postId)
-          .then(setComments)
-          .catch((err) => {
-            console.error('Error loading comments', err);
-          });
+        loadComments(postId);
       }
     }
   }, [id]);
@@ -53,7 +57,11 @@ const PostDetails = () => {
         <p className="paragraph">{post.content}</p>
         <img src={post.previewImage} alt="Preview image" />
       </div>
-      <CommentSection comments={comments}></CommentSection>
+      <CommentSection
+        comments={comments}
+        postId={Number(id)}
+        loadComments={loadComments}
+      ></CommentSection>
     </>
   );
 };
