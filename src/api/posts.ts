@@ -3,7 +3,6 @@ import type { Post, PostData, NewPostData } from '../types';
 import { AxiosError } from 'axios';
 
 export const createPost = async (data: NewPostData): Promise<Post | string> => {
-  console.log(data);
   try {
     const res = await api.post(`/posts`, data);
     return res.data;
@@ -22,14 +21,11 @@ export const createPost = async (data: NewPostData): Promise<Post | string> => {
 
 export const fetchPosts = async (): Promise<Post[]> => {
   const res = await api.get('/posts');
-  console.log(res.data);
   return res.data;
 };
 
 export const fetchAllPosts = async (): Promise<Post[]> => {
-  console.log('here before res');
   const res = await api.get('/posts/all');
-  console.log(res.data);
   return res.data;
 };
 
@@ -40,9 +36,7 @@ export const fetchPostById = async (id: number): Promise<Post> => {
 
 export const updatePost = async (data: PostData): Promise<Post | string> => {
   try {
-    console.log(`/posts/${data.id}`);
     const res = await api.put(`/posts/${data.id}`, data);
-    console.log(res.data);
     return res.data;
   } catch (error) {
     let message = 'Something went wrong';
