@@ -43,6 +43,11 @@ export const EditableTable = <T extends { id: number }>({
                     />
                   ) : field === 'id' ? (
                     <div>{value.id > 0 ? value.id : ''}</div>
+                  ) : field === 'content' ? (
+                    <textarea
+                      value={String(value[field])}
+                      onChange={(e) => handleInputChange?.(value.id, field, e.target.value)}
+                    />
                   ) : (
                     <input
                       type="text"

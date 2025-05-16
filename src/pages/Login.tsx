@@ -22,7 +22,9 @@ const Login = () => {
   };
   return (
     <div>
-      <Link to="/">Back</Link>
+      <Link to="/" className="nav-link">
+        Back
+      </Link>
       <h2>Login</h2>
       <p>{errorMessage}</p>
       <input

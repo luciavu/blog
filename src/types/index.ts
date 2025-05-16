@@ -15,8 +15,14 @@ export interface Comment {
   id: number;
   postId: number;
   authorId: number;
+  author: User;
   text: string;
   createdAt: string;
+}
+
+export interface User {
+  username: string;
+  isAdmin: boolean;
 }
 
 export interface AuthTokenPayload {

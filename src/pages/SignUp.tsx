@@ -19,7 +19,9 @@ const SignUp = () => {
   };
   return (
     <div>
-      <Link to="/">Back</Link>
+      <Link to="/" className="nav-link">
+        Back
+      </Link>
       <h2>Sign up</h2>
       {errorMessage}
       <input

@@ -9,6 +9,7 @@ export const fetchComments = async () => {
 
 export const fetchCommentsFromPostId = async (id: number): Promise<Comment[]> => {
   const res = await api.get(`/posts/${id}/comments`);
+  console.log(res.data);
   return res.data;
 };
 

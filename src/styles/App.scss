@@ -11,6 +11,8 @@ html,
 body {
   height: 100%;
   font-size: 16px;
+
+  color: white;
 }
 
 a {
@@ -18,11 +20,20 @@ a {
   color: black;
 }
 
+.nav-link {
+  align-self: start;
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: var(--main);
+  text-underline-offset: 0.2rem;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: Inter, Arial, Helvetica, sans-serif;
   line-height: 1.6;
+  background-color: black;
 }
 
 .flex-container {
@@ -32,6 +43,7 @@ body {
 }
 
 header {
+  background-color: white;
   .logo {
     padding: 0 1.2rem;
     display: flex;
