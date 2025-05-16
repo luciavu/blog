@@ -1,9 +1,10 @@
-import { fetchAllPosts, updatePost, deletePost, createPost } from '../api/posts';
+import { fetchAllPosts, updatePost, deletePost, createPost } from '../../api/posts';
 import { useState, useEffect } from 'react';
-import type { Post, Comment } from '../types';
-import { useAuth } from '../context/AuthContext';
-import EditableTable from '../components/EditableTable/EditableTable';
-import { fetchComments, deleteComment } from '../api/comments';
+import type { Post, Comment } from '../../types';
+import { useAuth } from '../../context/AuthContext';
+import EditableTable from '../../components/EditableTable/EditableTable';
+import { fetchComments, deleteComment } from '../../api/comments';
+import './AdminDashboard.scss';
 
 const AdminDashboard = () => {
   const { id } = useAuth();
@@ -71,7 +72,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div>
+    <div className="admin-dashboard flex-container">
       <EditableTable<Post>
         fields={['id', 'title', 'previewImage', 'content', 'published']}
         values={[...posts, { ...newPost, id: -1 }]}

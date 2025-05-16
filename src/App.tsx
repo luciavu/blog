@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import PostDetails from './pages/PostDetails/PostDetails';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 import Layout from './components/Layout';
 import RequireAdmin from './auth/RequireAdmin';
 

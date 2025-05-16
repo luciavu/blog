@@ -1,3 +1,5 @@
+import './EditableTable.scss';
+
 type EditableTableProps<T extends { id: number }> = {
   fields: (keyof T)[];
   values: T[];
@@ -45,6 +47,8 @@ export const EditableTable = <T extends { id: number }>({
                     <div>{value.id > 0 ? value.id : ''}</div>
                   ) : field === 'content' ? (
                     <textarea
+                      rows={4}
+                      cols={100}
                       value={String(value[field])}
                       onChange={(e) => handleInputChange?.(value.id, field, e.target.value)}
                     />
@@ -60,10 +64,12 @@ export const EditableTable = <T extends { id: number }>({
               {value.id > 0 ? (
                 <>
                   <td>
-                    <button onClick={() => handleSave?.(value)}>Save changes</button>
+                    <button onClick={() => handleSave?.(value)}>Save</button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(value)}>Delete</button>
+                    <button className="delete" onClick={() => handleDelete(value)}>
+                      Delete
+                    </button>
                   </td>
                 </>
               ) : (

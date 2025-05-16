@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Form from '../components/Form/Form';
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -22,24 +22,25 @@ const Login = () => {
   };
   return (
     <div>
-      <Link to="/" className="nav-link">
-        Back
-      </Link>
-      <h2>Login</h2>
-      <p>{errorMessage}</p>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+      <Form
+        title="Login"
+        errorMessage={errorMessage}
+        submit={handleLogin}
+        fields={[
+          {
+            type: 'text',
+            placeholder: 'username',
+            value: username,
+            onChange: (e) => setUsername(e.target.value),
+          },
+          {
+            type: 'password',
+            placeholder: 'Password',
+            value: password,
+            onChange: (e) => setPassword(e.target.value),
+          },
+        ]}
+      ></Form>
     </div>
   );
 };
