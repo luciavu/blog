@@ -24,7 +24,7 @@ export const EditableTable = <T extends { id: number }>({
   handleCreate,
 }: EditableTableProps<T>) => {
   return (
-    <div className={`${typeName}-summary`}>
+    <div className={`${typeName}-summary table-summary`}>
       <h1>
         {typeName} ({values.length})
       </h1>
@@ -43,6 +43,7 @@ export const EditableTable = <T extends { id: number }>({
                 <td key={index}>
                   {field === 'published' ? (
                     <input
+                      id={`${value.id}${String(field)}`}
                       type="checkbox"
                       checked={Boolean(value[field])}
                       onChange={(e) => handleInputChange?.(value.id, field, e.target.checked)}
@@ -51,6 +52,7 @@ export const EditableTable = <T extends { id: number }>({
                     <div>{value.id > 0 ? value.id : ''}</div>
                   ) : field === 'content' ? (
                     <textarea
+                      id={`${value.id}${String(field)}`}
                       rows={4}
                       cols={100}
                       value={String(value[field])}
@@ -59,6 +61,7 @@ export const EditableTable = <T extends { id: number }>({
                   ) : (
                     <input
                       type="text"
+                      id={`${value.id}${String(field)}`}
                       value={String(value[field])}
                       onChange={(e) => handleInputChange?.(value.id, field, e.target.value)}
                     />
@@ -78,7 +81,7 @@ export const EditableTable = <T extends { id: number }>({
                 </>
               ) : (
                 <td colSpan={2}>
-                  <button onClick={() => handleCreate?.()}>Add</button>
+                  <button onClick={() => handleCreate?.()}>Create Post</button>
                 </td>
               )}
             </tr>

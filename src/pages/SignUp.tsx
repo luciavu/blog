@@ -28,12 +28,14 @@ const SignUp = () => {
           placeholder: 'username',
           value: username,
           onChange: (e) => setUsername(e.target.value),
+          autocomplete: 'username',
         },
         {
           type: 'password',
           placeholder: 'password',
           value: password,
           onChange: (e) => setPassword(e.target.value),
+          autocomplete: 'new-password',
         },
       ]}
     ></Form>

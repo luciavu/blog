@@ -32,12 +32,14 @@ const Login = () => {
             placeholder: 'username',
             value: username,
             onChange: (e) => setUsername(e.target.value),
+            autocomplete: 'username',
           },
           {
             type: 'password',
             placeholder: 'Password',
             value: password,
             onChange: (e) => setPassword(e.target.value),
+            autocomplete: 'current-password',
           },
         ]}
       ></Form>

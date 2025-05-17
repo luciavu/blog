@@ -1,3 +1,25 @@
+@media only screen and (max-width: 1025px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+
+  body .grid-container .grid {
+    grid-template-columns: none;
+  }
+
+  .grid-container {
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+
+    .grid {
+      .large-card {
+        grid-row: 1 / span 1;
+        grid-column: 1;
+      }
+    }
+  }
+}
+
 .grid-container {
   .welcome-message {
     margin-bottom: 5rem;

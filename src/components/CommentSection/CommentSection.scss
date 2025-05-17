@@ -1,3 +1,10 @@
+@media only screen and (max-width: 768px) {
+  body .comment-section h1 {
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+}
+
 .comment-section {
   h1 {
     margin-bottom: 1rem;

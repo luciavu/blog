@@ -4,6 +4,7 @@ type FormField = {
   type: string;
   placeholder: string;
   value: string;
+  autocomplete: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 type FormProps = {
@@ -25,11 +26,13 @@ const Form = ({ title, errorMessage, submit, fields }: FormProps) => {
         <div className="fields">
           {fields.map((field, index) => (
             <input
+              id={field.placeholder}
               key={index}
               type={field.type}
               placeholder={field.placeholder}
               value={field.value}
               onChange={field.onChange}
+              autoComplete={field.autocomplete}
             />
           ))}
 

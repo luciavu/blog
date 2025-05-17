@@ -13,7 +13,6 @@ export const fetchComments = async () => {
 
 export const fetchCommentsFromPostId = async (id: number): Promise<Comment[]> => {
   const res = await api.get(`/posts/${id}/comments`);
-  console.log(res.data);
   return res.data;
 };
 
@@ -22,7 +21,6 @@ export const createComment = async (
   data: CommentData
 ): Promise<Comment | string> => {
   try {
-    console.log(postId, data);
     const res = await api.post(`/posts/${postId}/comments`, data);
     return res.data;
   } catch (error) {
