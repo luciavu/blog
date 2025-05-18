@@ -31,7 +31,7 @@ const Home = () => {
           </p>
         )}
       </div>
-      {!posts ? (
+      {posts.length === 0 ? (
         <LoadingScreen subject={'posts'}></LoadingScreen>
       ) : (
         <div className="grid">
