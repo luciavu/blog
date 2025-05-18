@@ -4,6 +4,7 @@ import type { Post } from '../types';
 import PostPreview from '../components/PostPreview/PostPreview';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import LoadingScreen from '../components/LoadingScreen/LoadingScreen';
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
@@ -30,12 +31,15 @@ const Home = () => {
           </p>
         )}
       </div>
-
-      <div className="grid">
-        {posts.map((post) => (
-          <PostPreview key={post.id} post={post} idx={post.id}></PostPreview>
-        ))}
-      </div>
+      {!posts ? (
+        <LoadingScreen subject={'posts'}></LoadingScreen>
+      ) : (
+        <div className="grid">
+          {posts.map((post) => (
+            <PostPreview key={post.id} post={post} idx={post.id}></PostPreview>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
